@@ -37,7 +37,7 @@ def get_closest(file_list, target_dateobj, fmt, skip):
 def do_grid_map_gates_to_grid(radar):
     grids = pyart.map.grid_from_radars(
          radar, grid_shape=(36, 1041, 1041),
-        grid_limits=((0, 17000.0),(-900000, 900000), (-1000000, 1000000)),
+        grid_limits=((0, 17000.0),(-900000, 1500000), (-2000000, 2000000)),
         gridding_algo="map_gates_to_grid",
         weighting_function='BARNES',
         grid_origin = [35, -98.5])
@@ -47,7 +47,7 @@ def do_grid_map_gates_to_grid(radar):
 if __name__ == "__main__":
     for t in np.arange(0,55, 5):
         print(t)
-        desired_date = datetime.datetime(2015,5, 13, 19, t)
+        desired_date = datetime.datetime(2015,5, 13, 20, t)
         outdir = sys.argv[2]
         #files = os.listdir('/data/ok_rain/temp/level2/raw/KVNX')
         filenames = []
@@ -95,7 +95,8 @@ if __name__ == "__main__":
 
         # panel 1, basemap, radar reflectivity and NARR overlay
         ax1 = fig.add_axes(map_panel_axes)
-        display.plot_basemap(lon_lines = np.arange(-104, -93, 2) )
+        display.plot_basemap(lon_lines = np.arange(-124, -73, 4),
+                lat_lines = np.arange(20,50,2))
         display.plot_grid('reflectivity', level=level, vmin=vmin, vmax=vmax)
         display.plot_crosshairs(lon=lon, lat=lat)
 
