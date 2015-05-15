@@ -36,10 +36,10 @@ def get_closest(file_list, target_dateobj, fmt, skip):
 
 def do_grid_map_gates_to_grid(radar):
     grids = pyart.map.grid_from_radars(
-         radar, grid_shape=(36, 1041, 1041),
-        grid_limits=((0, 17000.0),(-900000, 1500000), (-2000000, 2000000)),
+         radar, grid_shape=(37, 1041, 1041),
+         grid_limits=((0, 18000.0),(-900000, 1500000), (-2300000, 2300000)),
         gridding_algo="map_gates_to_grid",
-        weighting_function='BARNES',
+        weighting_function='CRESSMAN',
         grid_origin = [35, -98.5])
     return grids
 
@@ -122,6 +122,6 @@ if __name__ == "__main__":
         fig.text(0.5, 0.9, title)
         sstr = desired_date.strftime('%Y%m%d_%H%M%S')
         print(sstr)
-        plt.savefig(outdir + '/diag_'+sstr+'.png')
+        plt.savefig(outdir + '/diag_'+sstr+'.png', dpi = 400)
 
 
